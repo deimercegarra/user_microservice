@@ -13,6 +13,5 @@ spring:
     show-sql: true
   application:
     name: user-microservice
-
 appDescription: "Pragma User"
 appVersion: "1.0.0"
