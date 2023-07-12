@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.pragma.user_microservice.iml" filepath="$PROJECT_DIR$/.idea/modules/com.pragma.user_microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.pragma.user_microservice.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.pragma.user_microservice.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.pragma.user_microservice.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.pragma.user_microservice.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/user_microservice.iml" filepath="$PROJECT_DIR$/.idea/user_microservice.iml" />
+    </modules>
+  </component>
+</project>
