@@ -13,7 +13,7 @@ public interface IUserServicePort {
 
     UserModel getUser(Long userId);
 
-    CommonResponseModel findOwner(Long userId);
+    CommonResponseModel findRole(Long userId);
 
     void updateUser(UserModel userModel);
 

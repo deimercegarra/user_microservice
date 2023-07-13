@@ -14,7 +14,7 @@ public interface IUserHandler {
 
     public UserResponseDto getUser(Long userId);
 
-    public CommonResponseDto findOwner(Long userId);
+    public CommonResponseDto findRole(Long userId);
 
     public void updateUser(UserRequestDto userRequestDto);
 

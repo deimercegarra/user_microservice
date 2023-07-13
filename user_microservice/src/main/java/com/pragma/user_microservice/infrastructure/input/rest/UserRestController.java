@@ -39,16 +39,16 @@ public class UserRestController {
     }
 
 
-    @Operation(summary = "Find owner")
+    @Operation(summary = "Find role")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful request",
                     content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-            @ApiResponse(responseCode = "404", description = "Not found",
+            @ApiResponse(responseCode = "404", description = "No data found for the requested petition",
                     content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error"))),
     })
-    @GetMapping("/findOwner/{userId}")
-    public ResponseEntity<CommonResponseDto> findOwner(@PathVariable Long userId) {
-        CommonResponseDto commonResponseDto = iUserHandler.findOwner(userId);
+    @GetMapping("/findRole/{userId}")
+    public ResponseEntity<CommonResponseDto> findRole(@PathVariable Long userId) {
+        CommonResponseDto commonResponseDto = iUserHandler.findRole(userId);
 
         if (!commonResponseDto.getStatus())
             return ResponseEntity.status(HttpStatus.ACCEPTED)

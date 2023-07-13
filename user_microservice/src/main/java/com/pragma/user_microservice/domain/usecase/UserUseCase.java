@@ -35,16 +35,13 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public CommonResponseModel findOwner(Long userId) {
+    public CommonResponseModel findRole(Long userId) {
         UserModel userModel = getUser(userId);
 
         if (userModel == null)
             throw new DomainException(new CommonResponseDto("404","User not found.", false).toString());
 
-        if (!userModel.getRoleEntity().getName().equalsIgnoreCase(Constants.ROLE_ADMIN))
-            return new CommonResponseModel("202","The role is not administrator.", false);
-
-        return new CommonResponseModel("200","The role is administrator.", true);
+        return new CommonResponseModel("200", userModel.getRoleEntity().getName(), true);
     }
 
     @Override

@@ -41,8 +41,8 @@ public class UserHandler implements IUserHandler {
     }
 
     @Override
-    public CommonResponseDto findOwner(Long userId) {
-        return iCommonResponseMapper.toResponse(iUserServicePort.findOwner(userId));
+    public CommonResponseDto findRole(Long userId) {
+        return iCommonResponseMapper.toResponse(iUserServicePort.findRole(userId));
     }
 
     @Override
