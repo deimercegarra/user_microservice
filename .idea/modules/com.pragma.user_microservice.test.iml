@@ -16,6 +16,7 @@
     <orderEntry type="library" name="Gradle: org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4" level="project" />
     <orderEntry type="library" name="Gradle: org.mapstruct:mapstruct:1.5.3.Final" level="project" />
     <orderEntry type="library" name="Gradle: com.nimbusds:nimbus-jose-jwt:9.30.2" level="project" />
+    <orderEntry type="library" name="Gradle: io.jsonwebtoken:jjwt-api:0.11.5" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-test:3.0.4" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-test:6.0.2" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-json:3.1.1" level="project" />
@@ -120,7 +121,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.jsonwebtoken:jjwt-impl:0.11.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.jsonwebtoken:jjwt-jackson:0.11.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.mysql:mysql-connector-j:8.0.33" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.jsonwebtoken:jjwt-api:0.11.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.glassfish.jaxb:jaxb-runtime:4.0.3" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate.common:hibernate-commons-annotations:6.0.6.Final" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.smallrye:jandex:3.0.5" level="project" />

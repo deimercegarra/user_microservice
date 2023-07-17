@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IUserServicePort {
 
-    void saveUser(UserModel userModel);
+    UserModel saveUser(UserModel userModel);
 
     List<UserModel> getAllUsers();
 
@@ -15,8 +15,8 @@ public interface IUserServicePort {
 
     CommonResponseModel findRole(Long userId);
 
-    void updateUser(UserModel userModel);
+    UserModel updateUser(UserModel userModel);
 
-    void deleteUser(Long userId);
+    CommonResponseModel deleteUser(Long userId);
 
 }

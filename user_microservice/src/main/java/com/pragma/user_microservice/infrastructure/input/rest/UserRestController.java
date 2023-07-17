@@ -26,10 +26,9 @@ public class UserRestController {
 
     @Operation(summary = "Add a new owner")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User created",
-                    content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-            @ApiResponse(responseCode = "409", description = "User already exists",
-                    content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error"))),
+            @ApiResponse(responseCode = "201", description = "User created.", content = @Content),
+            @ApiResponse(responseCode = "202", description = "Request accepted but unsuccessful.", content = @Content),
+            @ApiResponse(responseCode = "409", description = "User already exists.", content = @Content)
     })
     @PostMapping("/owner")
     public ResponseEntity<Map<String, String>> saveOwner(@Valid @RequestBody UserRequestDto userRequestDto) {
@@ -41,10 +40,8 @@ public class UserRestController {
 
     @Operation(summary = "Find role")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "successful request",
-                    content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-            @ApiResponse(responseCode = "404", description = "No data found for the requested petition",
-                    content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error"))),
+            @ApiResponse(responseCode = "200", description = "successful request.", content = @Content),
+            @ApiResponse(responseCode = "404", description = "No data found for the requested petition.", content = @Content)
     })
     @GetMapping("/findRole/{userId}")
     public ResponseEntity<CommonResponseDto> findRole(@PathVariable Long userId) {

@@ -30,7 +30,7 @@ public class CommonResponseDto <E>{
     }
 
     public CommonResponseDto(String code, String message, Boolean status) {
-        this.message = message;
+        this.code = code;
         this.status = status;
         this.message = message;
     }
