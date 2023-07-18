@@ -12,7 +12,9 @@ public interface IUserHandler {
 
     public List<UserResponseDto> getAllUsers();
 
-    public UserResponseDto getUser(Long userId);
+    public CommonResponseDto getUser(Long userId);
+
+    public CommonResponseDto getUserByUsername(String username);
 
     public CommonResponseDto findRole(Long userId);
 

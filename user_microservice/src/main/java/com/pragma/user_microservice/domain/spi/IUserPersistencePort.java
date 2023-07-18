@@ -12,6 +12,8 @@ public interface IUserPersistencePort {
 
     UserModel getUser(Long userId);
 
+    UserModel getUserByUsername(String username);
+
     UserModel updateUser(UserModel userModel);
 
     void deleteUser(Long userId);

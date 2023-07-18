@@ -14,5 +14,10 @@ spring:
   application:
     name: user-microservice
 
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
 appDescription: "Pragma User"
 appVersion: "1.0.0"

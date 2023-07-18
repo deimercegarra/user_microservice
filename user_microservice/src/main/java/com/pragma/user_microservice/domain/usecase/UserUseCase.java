@@ -55,6 +55,11 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
+    public UserModel getUserByUsername(String username) {
+        return iUserPersistencePort.getUserByUsername(username);
+    }
+
+    @Override
     public CommonResponseModel findRole(Long userId) {
         UserModel userModel = getUser(userId);
 

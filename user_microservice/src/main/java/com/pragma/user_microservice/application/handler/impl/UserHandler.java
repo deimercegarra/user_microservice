@@ -36,8 +36,13 @@ public class UserHandler implements IUserHandler {
     }
 
     @Override
-    public UserResponseDto getUser(Long userId) {
-        return iUserResponseMapper.toResponse(iUserServicePort.getUser(userId));
+    public CommonResponseDto getUser(Long userId) {
+        return new CommonResponseDto(true, "200", "OK", iUserResponseMapper.toResponse(iUserServicePort.getUser(userId)));
+    }
+
+    @Override
+    public CommonResponseDto getUserByUsername(String username) {
+        return new CommonResponseDto(true, "200", "OK", iUserResponseMapper.toResponse(iUserServicePort.getUserByUsername(username)));
     }
 
     @Override

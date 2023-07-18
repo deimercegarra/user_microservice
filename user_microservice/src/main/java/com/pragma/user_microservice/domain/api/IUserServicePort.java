@@ -1,5 +1,6 @@
 package com.pragma.user_microservice.domain.api;
 
+import com.pragma.user_microservice.application.dto.response.CommonResponseDto;
 import com.pragma.user_microservice.domain.model.CommonResponseModel;
 import com.pragma.user_microservice.domain.model.UserModel;
 
@@ -12,6 +13,8 @@ public interface IUserServicePort {
     List<UserModel> getAllUsers();
 
     UserModel getUser(Long userId);
+
+    UserModel getUserByUsername(String username);
 
     CommonResponseModel findRole(Long userId);
 

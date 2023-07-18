@@ -55,4 +55,38 @@ public class UserRestController {
                 .body(commonResponseDto);
     }
 
+    @Operation(summary = "Find user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful request.", content = @Content),
+            @ApiResponse(responseCode = "404", description = "No data found for the requested petition.", content = @Content)
+    })
+    @GetMapping("/findUser/{userId}")
+    public ResponseEntity<CommonResponseDto> findUser(@PathVariable Long userId) {
+        CommonResponseDto commonResponseDto = iUserHandler.getUser(userId);
+
+        if (!commonResponseDto.getStatus())
+            return ResponseEntity.status(HttpStatus.ACCEPTED)
+                    .body(commonResponseDto);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(commonResponseDto);
+    }
+
+    @Operation(summary = "Find user by email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful request.", content = @Content),
+            @ApiResponse(responseCode = "404", description = "No data found for the requested petition.", content = @Content)
+    })
+    @GetMapping("/findUserByUsername/{username}")
+    public ResponseEntity<CommonResponseDto> findUserByUsername(@PathVariable String username) {
+        CommonResponseDto commonResponseDto = iUserHandler.getUserByUsername(username);
+
+        if (!commonResponseDto.getStatus())
+            return ResponseEntity.status(HttpStatus.ACCEPTED)
+                    .body(commonResponseDto);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(commonResponseDto);
+    }
+
 }
