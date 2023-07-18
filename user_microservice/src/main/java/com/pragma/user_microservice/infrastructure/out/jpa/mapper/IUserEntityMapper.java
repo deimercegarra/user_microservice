@@ -1,6 +1,7 @@
 package com.pragma.user_microservice.infrastructure.out.jpa.mapper;
 
 
+import com.pragma.user_microservice.domain.model.EmployeeModel;
 import com.pragma.user_microservice.domain.model.UserModel;
 import com.pragma.user_microservice.infrastructure.out.jpa.entity.UserEntity;
 import org.mapstruct.Mapper;
@@ -15,6 +16,8 @@ import java.util.List;
 public interface IUserEntityMapper {
 
     UserEntity toEntity(UserModel user);
+
+    UserEntity toEntity(EmployeeModel employeeModel);
     UserModel toUserModel(UserEntity UserEntity);
     List<UserModel> toUserModelList(List<UserEntity> userEntityList);
 

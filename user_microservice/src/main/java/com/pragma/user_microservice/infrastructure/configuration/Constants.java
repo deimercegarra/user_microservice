@@ -12,4 +12,8 @@ public class Constants {
 
     public static final String ROLE_ADMIN = "Administrator";
 
+    public static final String ROLE_EMPLOYEE = "Employee";
+
+    public static final String ROLE_CUSTOMER = "Customer";
+
 }

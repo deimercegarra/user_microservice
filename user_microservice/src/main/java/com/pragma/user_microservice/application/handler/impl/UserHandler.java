@@ -1,10 +1,12 @@
 package com.pragma.user_microservice.application.handler.impl;
 
+import com.pragma.user_microservice.application.dto.request.EmployeeRequestDto;
 import com.pragma.user_microservice.application.dto.request.UserRequestDto;
 import com.pragma.user_microservice.application.dto.response.CommonResponseDto;
 import com.pragma.user_microservice.application.dto.response.UserResponseDto;
 import com.pragma.user_microservice.application.handler.IUserHandler;
 import com.pragma.user_microservice.application.mapper.ICommonResponseMapper;
+import com.pragma.user_microservice.application.mapper.IEmployeeRequestMapper;
 import com.pragma.user_microservice.application.mapper.IUserRequestMapper;
 import com.pragma.user_microservice.application.mapper.IUserResponseMapper;
 import com.pragma.user_microservice.domain.api.IUserServicePort;
@@ -23,11 +25,17 @@ public class UserHandler implements IUserHandler {
     private final IUserRequestMapper iUserRequestMapper;
     private final IUserResponseMapper iUserResponseMapper;
     private final ICommonResponseMapper iCommonResponseMapper;
+    private final IEmployeeRequestMapper iEmployeeRequestMapper;
 
 
     @Override
     public void saveUser(UserRequestDto userRequestDto) {
         iUserServicePort.saveUser(iUserRequestMapper.toUSer(userRequestDto));
+    }
+
+    @Override
+    public void saveEmployee(EmployeeRequestDto employeeRequestDto) {
+        iUserServicePort.saveEmployee(iEmployeeRequestMapper.toModel(employeeRequestDto));
     }
 
     @Override

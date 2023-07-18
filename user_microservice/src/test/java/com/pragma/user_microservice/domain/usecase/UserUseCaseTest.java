@@ -2,8 +2,10 @@ package com.pragma.user_microservice.domain.usecase;
 
 import com.pragma.user_microservice.domain.exception.DomainException;
 import com.pragma.user_microservice.domain.model.CommonResponseModel;
+import com.pragma.user_microservice.domain.model.EmployeeModel;
 import com.pragma.user_microservice.domain.model.RoleModel;
 import com.pragma.user_microservice.domain.model.UserModel;
+import com.pragma.user_microservice.domain.spi.IRolePersistencePort;
 import com.pragma.user_microservice.domain.spi.IUserPersistencePort;
 import com.pragma.user_microservice.domain.exception.AgeNotAllowedException;
 import com.pragma.user_microservice.infrastructure.out.jpa.entity.UserEntity;
@@ -25,6 +27,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class UserUseCaseTest {
     private IUserPersistencePort iUserPersistencePort;
+    private IRolePersistencePort iRolePersistencePort;
     private UserUseCase iUserServicePort;
 
     private UserModel userModel;
@@ -34,7 +37,8 @@ class UserUseCaseTest {
     void setUp(){
 
         iUserPersistencePort = mock(IUserPersistencePort.class);
-        iUserServicePort = new UserUseCase(iUserPersistencePort);
+        iRolePersistencePort = mock(IRolePersistencePort.class);
+        iUserServicePort = new UserUseCase(iUserPersistencePort, iRolePersistencePort);
         MockitoAnnotations.initMocks(this);
 
         roleModel = new RoleModel();
@@ -76,16 +80,54 @@ class UserUseCaseTest {
 
     @Test
     void saveUserTest() {
-        //doNothing().when(iUserPersistencePort).saveUser(userModel);
-
-        //iUserServicePort.saveUser(userModel);
-
-        //assertTrue(iUserServicePort.validateAge(userModel));
-
         when(iUserPersistencePort.saveUser(any(UserModel.class))).thenReturn(userModel);
         assertNotNull(iUserServicePort.saveUser(userModel));
+    }
 
-        //verify(iUserPersistencePort).saveUser(userModel);
+    @Test
+    void saveEmployeeTest() {
+        roleModel = new RoleModel();
+        roleModel.setId(2L);
+        roleModel.setDescription("Propietario");
+        roleModel.setName("Owner");
+
+        EmployeeModel userEmployeeModel = new EmployeeModel();
+
+        userEmployeeModel.setName("Deimer");
+        userEmployeeModel.setLastName("Cegarra");
+        userEmployeeModel.setDocumentNumber("1004911853");
+        userEmployeeModel.setPhone("+573022859058");
+        userEmployeeModel.setBirthDate(new Date("21/05/2020")); //dd-mm-yyyy
+        userEmployeeModel.setEmail("joel@gmail.com");
+        userEmployeeModel.setPassword("fdgcbhh");
+        userEmployeeModel.setIdRol(2L);
+
+        when(iRolePersistencePort.getRole(userEmployeeModel.getIdRol())).thenReturn(roleModel);
+        when(iUserPersistencePort.saveEmployee(userEmployeeModel)).thenReturn(userModel);
+        assertNotNull(iUserServicePort.saveEmployee(userEmployeeModel));
+    }
+
+    @Test
+    void saveEmployeeDomainExceptionTest() {
+        roleModel = new RoleModel();
+        roleModel.setId(2L);
+        roleModel.setDescription("Propietario");
+        roleModel.setName("Owner");
+
+        EmployeeModel userEmployeeModel = new EmployeeModel();
+
+        userEmployeeModel.setName("Deimer");
+        userEmployeeModel.setLastName("Cegarra");
+        userEmployeeModel.setDocumentNumber("1004911853");
+        userEmployeeModel.setPhone("+573022859058");
+        userEmployeeModel.setBirthDate(new Date("21/05/2020")); //dd-mm-yyyy
+        userEmployeeModel.setEmail("joel@gmail.com");
+        userEmployeeModel.setPassword("fdgcbhh");
+        userEmployeeModel.setIdRol(2L);
+
+        when(iRolePersistencePort.getRole(userEmployeeModel.getIdRol())).thenReturn(roleModel);
+        when(iUserServicePort.saveEmployee(userEmployeeModel)).thenThrow(DomainException.class);
+        assertThrows(DomainException.class, () -> iUserServicePort.saveEmployee(userEmployeeModel));
     }
 
     @Test
@@ -116,18 +158,6 @@ class UserUseCaseTest {
 
     @Test
     void updateUserTest() {
-        /*iUserPersistencePort.updateUser(userModel);
-        doNothing().when(iUserPersistencePort).updateUser(userModel);
-        verify(iUserPersistencePort).updateUser(userModel);*/
-
-        //userModel.setId(1L);
-
-        //when(iUserPersistencePort.updateUser(any(UserModel.class))).thenReturn(userModel);
-        //assertNotNull(iUserServicePort.updateUser(userModel));
-        //verify(iUserPersistencePort, times(1)).updateUser(userModel);
-
-        /*when(iUserPersistencePort.saveUser(any(UserModel.class))).thenReturn(userModel);
-        assertNotNull(iUserServicePort.saveUser(userModel));*/
     }
 
     @Test
@@ -140,8 +170,6 @@ class UserUseCaseTest {
     void deleteUserTest() {
         iUserPersistencePort.deleteUser(1L);
         verify(iUserPersistencePort, times(1)).deleteUser(1L);
-
-        //assertNotNull(iUserServicePort.deleteUser(1L));
     }
 
     @Test

@@ -4,9 +4,13 @@ import com.pragma.user_microservice.application.dto.response.CommonResponseDto;
 import com.pragma.user_microservice.domain.api.IUserServicePort;
 import com.pragma.user_microservice.domain.exception.DomainException;
 import com.pragma.user_microservice.domain.model.CommonResponseModel;
+import com.pragma.user_microservice.domain.model.EmployeeModel;
+import com.pragma.user_microservice.domain.model.RoleModel;
 import com.pragma.user_microservice.domain.model.UserModel;
+import com.pragma.user_microservice.domain.spi.IRolePersistencePort;
 import com.pragma.user_microservice.domain.spi.IUserPersistencePort;
 import com.pragma.user_microservice.domain.exception.AgeNotAllowedException;
+import com.pragma.user_microservice.infrastructure.configuration.Constants;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -17,9 +21,12 @@ import java.util.List;
 public class UserUseCase implements IUserServicePort {
 
     private final IUserPersistencePort iUserPersistencePort;
+    private final IRolePersistencePort iRolePersistencePort;
 
-    public UserUseCase(IUserPersistencePort iUserPersistencePort) {
+    public UserUseCase(IUserPersistencePort iUserPersistencePort,
+                       IRolePersistencePort iRolePersistencePort) {
         this.iUserPersistencePort = iUserPersistencePort;
+        this.iRolePersistencePort = iRolePersistencePort;
     }
 
     @Override
@@ -28,6 +35,17 @@ public class UserUseCase implements IUserServicePort {
         validateAge(userModel);
 
         return iUserPersistencePort.saveUser(userModel);
+    }
+
+    @Override
+    public UserModel saveEmployee(EmployeeModel employeeModel) {
+
+        RoleModel roleModel = iRolePersistencePort.getRole(employeeModel.getIdRol());
+
+        if (!roleModel.getName().equalsIgnoreCase(Constants.ROLE_OWNER))
+            throw new DomainException(new CommonResponseDto("401","Unauthorized User.", false).toString());
+
+        return iUserPersistencePort.saveEmployee(employeeModel);
     }
 
     public void validateAge(UserModel userModel) {

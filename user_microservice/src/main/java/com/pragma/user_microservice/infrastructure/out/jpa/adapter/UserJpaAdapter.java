@@ -1,5 +1,6 @@
 package com.pragma.user_microservice.infrastructure.out.jpa.adapter;
 
+import com.pragma.user_microservice.domain.model.EmployeeModel;
 import com.pragma.user_microservice.domain.model.RoleModel;
 import com.pragma.user_microservice.domain.model.UserModel;
 import com.pragma.user_microservice.domain.spi.IRolePersistencePort;
@@ -30,6 +31,18 @@ public class UserJpaAdapter implements IUserPersistencePort {
         RoleModel roleModel = iRolePersistencePort.getRoleByName(Constants.ROLE_OWNER);
         userModel.setRoleEntity(roleModel);
         UserEntity userEntity = iUserEntityMapper.toEntity(userModel);
+
+        return iUserEntityMapper.toUserModel(iUserRepository.save(userEntity));
+    }
+
+    @Override
+    public UserModel saveEmployee(EmployeeModel employeeModel) {
+
+        employeeModel.setPassword(passwordEncoder.encode((employeeModel.getPassword())));
+
+        RoleModel roleModel = iRolePersistencePort.getRoleByName(Constants.ROLE_EMPLOYEE);
+        employeeModel.setRoleEntity(roleModel);
+        UserEntity userEntity = iUserEntityMapper.toEntity(employeeModel);
 
         return iUserEntityMapper.toUserModel(iUserRepository.save(userEntity));
     }

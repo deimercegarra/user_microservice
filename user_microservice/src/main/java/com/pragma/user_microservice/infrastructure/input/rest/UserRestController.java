@@ -1,5 +1,6 @@
 package com.pragma.user_microservice.infrastructure.input.rest;
 
+import com.pragma.user_microservice.application.dto.request.EmployeeRequestDto;
 import com.pragma.user_microservice.application.dto.request.UserRequestDto;
 import com.pragma.user_microservice.application.dto.response.CommonResponseDto;
 import com.pragma.user_microservice.application.handler.IUserHandler;
@@ -27,12 +28,25 @@ public class UserRestController {
     @Operation(summary = "Add a new owner")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created.", content = @Content),
-            @ApiResponse(responseCode = "202", description = "Request accepted but unsuccessful.", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized User.", content = @Content),
             @ApiResponse(responseCode = "409", description = "User already exists.", content = @Content)
     })
     @PostMapping("/owner")
     public ResponseEntity<Map<String, String>> saveOwner(@Valid @RequestBody UserRequestDto userRequestDto) {
         iUserHandler.saveUser(userRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(Collections.singletonMap("201", "CREATED"));
+    }
+
+    @Operation(summary = "Add a new employee")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User created.", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized User.", content = @Content),
+            @ApiResponse(responseCode = "409", description = "User already exists.", content = @Content)
+    })
+    @PostMapping("/employee")
+    public ResponseEntity<Map<String, String>> saveEmployee(@Valid @RequestBody EmployeeRequestDto employeeRequestDto) {
+        iUserHandler.saveEmployee(employeeRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap("201", "CREATED"));
     }
