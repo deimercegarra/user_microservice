@@ -1,5 +1,6 @@
 package com.pragma.user_microservice.application.handler;
 
+import com.pragma.user_microservice.application.dto.request.CustomerRequestDto;
 import com.pragma.user_microservice.application.dto.request.EmployeeRequestDto;
 import com.pragma.user_microservice.application.dto.request.UserRequestDto;
 import com.pragma.user_microservice.application.dto.response.CommonResponseDto;
@@ -13,6 +14,8 @@ public interface IUserHandler {
 
     public void saveEmployee(EmployeeRequestDto employeeRequestDto);
 
+    void saveCustomer(CustomerRequestDto customerRequestDto);
+
     public List<UserResponseDto> getAllUsers();
 
     public CommonResponseDto getUser(Long userId);
@@ -24,5 +27,4 @@ public interface IUserHandler {
     public void updateUser(UserRequestDto userRequestDto);
 
     public void deleteUser(Long userId);
-
 }

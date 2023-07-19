@@ -48,6 +48,14 @@ public class UserJpaAdapter implements IUserPersistencePort {
     }
 
     @Override
+    public UserModel saveCustomer(UserModel userModel) {
+
+        userModel.setPassword(passwordEncoder.encode((userModel.getPassword())));
+
+        return iUserEntityMapper.toUserModel(iUserRepository.save(iUserEntityMapper.toEntity(userModel)));
+    }
+
+    @Override
     public List<UserModel> getAllUsers() {
         List<UserEntity> entityList = iUserRepository.findAll();
         if (entityList.isEmpty()) {

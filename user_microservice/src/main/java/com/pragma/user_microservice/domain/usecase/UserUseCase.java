@@ -48,6 +48,15 @@ public class UserUseCase implements IUserServicePort {
         return iUserPersistencePort.saveEmployee(employeeModel);
     }
 
+    @Override
+    public UserModel saveCustomer(UserModel userModel) {
+        RoleModel roleModel = iRolePersistencePort.getRole(userModel.getIdRol());
+
+        userModel.setRoleEntity(roleModel);
+
+        return iUserPersistencePort.saveCustomer(userModel);
+    }
+
     public void validateAge(UserModel userModel) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-dd-MM");
         LocalDate birthDate = LocalDate.parse(userModel.getBirthDate().toInstant()

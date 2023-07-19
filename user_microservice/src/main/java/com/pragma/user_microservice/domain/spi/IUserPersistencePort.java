@@ -11,6 +11,8 @@ public interface IUserPersistencePort {
 
     UserModel saveEmployee(EmployeeModel employeeModel);
 
+    UserModel saveCustomer(UserModel userModel);
+
     List<UserModel> getAllUsers();
 
     UserModel getUser(Long userId);
@@ -20,5 +22,4 @@ public interface IUserPersistencePort {
     UserModel updateUser(UserModel userModel);
 
     void deleteUser(Long userId);
-
 }

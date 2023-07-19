@@ -131,6 +131,25 @@ class UserUseCaseTest {
     }
 
     @Test
+    void saveCustomerTest() {
+        userModel = new UserModel();
+        //userModel.setId(5L);
+        userModel.setName("Deimer");
+        userModel.setLastName("Cegarra");
+        userModel.setDocumentNumber("1004911853");
+        userModel.setPhone("+573022859058");
+        userModel.setBirthDate(new Date("21/05/2020")); //dd-mm-yyyy
+        userModel.setEmail("joel@gmail.com");
+        userModel.setPassword("fdgcbhh");
+        userModel.setRoleEntity(roleModel);
+        userModel.setIdRol(4L);
+
+        when(iRolePersistencePort.getRole(userModel.getIdRol())).thenReturn(roleModel);
+        when(iUserPersistencePort.saveCustomer(userModel)).thenReturn(userModel);
+        assertNotNull(iUserServicePort.saveCustomer(userModel));
+    }
+
+    @Test
     void getAllUsersTest() {
         List<UserModel> list = new ArrayList<>();
 
@@ -175,7 +194,7 @@ class UserUseCaseTest {
     @Test
     void deleteUserDomainExceptionTest() {
         doThrow(DomainException.class).when(iUserPersistencePort).deleteUser(1L);
-        assertThrows(DomainException.class, () -> iUserServicePort.deleteUser(1L));
+        assertThrows(DomainException.class, () -> iUserServicePort.deleteUser(null));
     }
 
 }

@@ -14,6 +14,8 @@ public interface IUserServicePort {
 
     UserModel saveEmployee(EmployeeModel employeeModel);
 
+    UserModel saveCustomer(UserModel model);
+
     List<UserModel> getAllUsers();
 
     UserModel getUser(Long userId);
@@ -25,5 +27,4 @@ public interface IUserServicePort {
     UserModel updateUser(UserModel userModel);
 
     CommonResponseModel deleteUser(Long userId);
-
 }

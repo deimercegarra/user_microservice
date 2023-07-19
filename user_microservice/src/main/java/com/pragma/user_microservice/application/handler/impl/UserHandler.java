@@ -1,5 +1,6 @@
 package com.pragma.user_microservice.application.handler.impl;
 
+import com.pragma.user_microservice.application.dto.request.CustomerRequestDto;
 import com.pragma.user_microservice.application.dto.request.EmployeeRequestDto;
 import com.pragma.user_microservice.application.dto.request.UserRequestDto;
 import com.pragma.user_microservice.application.dto.response.CommonResponseDto;
@@ -36,6 +37,11 @@ public class UserHandler implements IUserHandler {
     @Override
     public void saveEmployee(EmployeeRequestDto employeeRequestDto) {
         iUserServicePort.saveEmployee(iEmployeeRequestMapper.toModel(employeeRequestDto));
+    }
+
+    @Override
+    public void saveCustomer(CustomerRequestDto customerRequestDto) {
+        iUserServicePort.saveCustomer(iUserRequestMapper.toModel(customerRequestDto));
     }
 
     @Override

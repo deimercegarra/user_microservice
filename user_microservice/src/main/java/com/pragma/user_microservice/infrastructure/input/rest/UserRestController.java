@@ -1,5 +1,6 @@
 package com.pragma.user_microservice.infrastructure.input.rest;
 
+import com.pragma.user_microservice.application.dto.request.CustomerRequestDto;
 import com.pragma.user_microservice.application.dto.request.EmployeeRequestDto;
 import com.pragma.user_microservice.application.dto.request.UserRequestDto;
 import com.pragma.user_microservice.application.dto.response.CommonResponseDto;
@@ -34,6 +35,19 @@ public class UserRestController {
     @PostMapping("/owner")
     public ResponseEntity<Map<String, String>> saveOwner(@Valid @RequestBody UserRequestDto userRequestDto) {
         iUserHandler.saveUser(userRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(Collections.singletonMap("201", "CREATED"));
+    }
+
+    @Operation(summary = "Add a new customer")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User created.", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized User.", content = @Content),
+            @ApiResponse(responseCode = "409", description = "User already exists.", content = @Content)
+    })
+    @PostMapping("/customer")
+    public ResponseEntity<Map<String, String>> saveCustomer(@Valid @RequestBody CustomerRequestDto customerRequestDto) {
+        iUserHandler.saveCustomer(customerRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap("201", "CREATED"));
     }
